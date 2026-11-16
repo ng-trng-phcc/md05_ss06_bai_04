@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: account-service
+  main:
+    banner-mode: "off"
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://core-db:5432/banking_db}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    hikari:
+      pool-name: BankingHikariPool
+      connection-timeout: 30000
+      validation-timeout: 5000
+      initialization-fail-timeout: 60000
+      maximum-pool-size: 5
+      minimum-idle: 1
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  sql:
+    init:
+      mode: never
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [requestId=%X{requestId:-none}] %logger{36} - %msg%n"
+  level:
+    com.zaxxer.hikari: INFO
+    com.rikkei.banking: INFO
+    org.hibernate: INFO

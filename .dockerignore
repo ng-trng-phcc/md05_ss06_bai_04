@@ -1,0 +1,10 @@
+.git
+.gitignore
+.gradle
+build
+.env
+.env.example
+homework
+*.log
+README.md
+docker-compose.yml

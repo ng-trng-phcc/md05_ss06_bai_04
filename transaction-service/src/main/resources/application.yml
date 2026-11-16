@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: transaction-service
+  main:
+    banner-mode: "off"
+
+server:
+  port: ${SERVER_PORT:8081}
+
+account-service:
+  base-url: ${ACCOUNT_SERVICE_BASE_URL:http://account-service:8080}
+  connect-timeout-ms: ${ACCOUNT_SERVICE_CONNECT_TIMEOUT_MS:2000}
+  read-timeout-ms: ${ACCOUNT_SERVICE_READ_TIMEOUT_MS:3000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [requestId=%X{requestId:-none}] %logger{36} - %msg%n"
+  level:
+    com.rikkei.banking.transaction: INFO
